@@ -6,6 +6,14 @@
 AudioCraft is a PyTorch library for deep learning research on audio generation. AudioCraft contains inference and training code
 for two state-of-the-art AI generative models producing high-quality audio: AudioGen and MusicGen.
 
+<a target="_blank" href="https://colab.research.google.com/github/camenduru/MusicGen-colab/blob/main/MusicGen_ClownOfMadness_plus_colab.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a target="_blank" href="https://huggingface.co/spaces/facebook/MusicGen">
+  <img src="https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-hf-spaces-sm.svg" alt="Open in HugginFace"/>
+</a>
+<br>
+
 ![image](https://github.com/GrandaddyShmax/audiocraft_plus/assets/52707645/c4c5327c-901a-40d8-91be-aa5afcf80b52)
 
 ## Features
@@ -21,6 +29,14 @@ AudioCraft Plus is an all-in-one WebUI for the original AudioCraft, adding many 
 - Music Continuation
 
 ## Installation
+If you are updating from the previous version of AudioCraft Plus, do the following steps in the AudioCraft Plus folder:
+```shell
+git pull
+pip install transformers --upgrade
+pip install  torchmetrics --upgrade
+```
+
+#### Otherwise: Clean Installation  
 AudioCraft requires Python 3.9, PyTorch 2.0.0. To install AudioCraft, you can run the following:
 
 ```shell
