@@ -13,6 +13,7 @@ for two state-of-the-art AI generative models producing high-quality audio: Audi
   <img src="https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-hf-spaces-sm.svg" alt="Open in HugginFace"/>
 </a>
 <br>
+<br>
 
 ![image](https://github.com/GrandaddyShmax/audiocraft_plus/assets/52707645/c4c5327c-901a-40d8-91be-aa5afcf80b52)
 
@@ -56,8 +57,11 @@ sudo apt-get install ffmpeg
 conda install 'ffmpeg<5' -c  conda-forge
 ```
 
-Incredible Installation video thanks to Pogs Cafe:  
+Installation video thanks to Pogs Cafe:  
 [![Untitled](http://img.youtube.com/vi/WjGk4bcbUOI/0.jpg)](http://www.youtube.com/watch?v=WjGk4bcbUOI "Installing MusicGen+ Locally")
+
+
+Additional installation guide by [radaevm](https://github.com/radaevm) can be found [HERE](https://github.com/GrandaddyShmax/audiocraft_plus/discussions/31)
 
 
 ## Models
