@@ -36,7 +36,7 @@ from audiocraft.models import AudioGen, MusicGen, MultiBandDiffusion
 from audiocraft.utils import ui
 import random, string
 
-version = "2.0.0a"
+version = "2.0.1"
 
 theme = gr.themes.Base(
     primary_hue="lime",
@@ -148,7 +148,6 @@ def load_model(version='GrandaddyShmax/musicgen-melody', custom_model=None, gen_
     print("Loading model", version)
     if MODELS is None:
         if version == 'GrandaddyShmax/musicgen-custom':
-            print("custom model: " + str(custom_model))
             MODEL = MusicGen.get_pretrained(custom_model)
         else:
             if gen_type == "music":
@@ -254,7 +253,7 @@ def info_to_params(audio_path):
             if not audio_path.name.endswith(".json"):
                 with taglib.File(audio_path.name, save_on_exit=False) as song:
                     if 'COMMENT' not in song.tags:
-                        return "Default", False, "", 120, "C", "Major", "large", None, "medium", 1, "", "", "", "", "", "", "", "", "", "", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, "sample", 10, 250, 0, 1.0, 5.0, -1, 12, "stereo", "48000"
+                        return "Default", False, "", 120, "C", "Major", "large", None, 1, "", "", "", "", "", "", "", "", "", "", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, "sample", 10, 250, 0, 1.0, 5.0, -1, 12, "stereo", "48000"
                     json_string = song.tags['COMMENT'][0]
                     data = json.loads(json_string)
                     struc_prompt = (False if data['bpm'] == "none" else True) if 'bpm' in data else False
@@ -263,7 +262,7 @@ def info_to_params(audio_path):
                     key = ("C" if data['key'] == "none" else data['key']) if 'key' in data else "C"
                     scale = ("Major" if data['scale'] == "none" else data['scale']) if 'scale' in data else "Major"
                     model = data['model'] if 'model' in data else "large"
-                    custom_model = (data['custom_model'] if data['custom_model'] in get_available_models() else None) if 'custom_model' in data else None
+                    custom_model = (data['custom_model'] if (data['custom_model']) in get_available_folders() else None) if 'custom_model' in data else None
                     decoder = data['decoder'] if 'decoder' in data else "Default"
                     if 'texts' not in data:
                         unique_prompts = 1
@@ -306,7 +305,7 @@ def info_to_params(audio_path):
                     key = ("C" if data['key'] == "none" else data['key']) if 'key' in data else "C"
                     scale = ("Major" if data['scale'] == "none" else data['scale']) if 'scale' in data else "Major"
                     model = data['model'] if 'model' in data else "large"
-                    custom_model = (data['custom_model'] if data['custom_model'] in get_available_models() else None) if 'custom_model' in data else None
+                    custom_model = (data['custom_model'] if data['custom_model'] in get_available_folders() else None) if 'custom_model' in data else None
                     decoder = data['decoder'] if 'decoder' in data else "Default"
                     if 'texts' not in data:
                         unique_prompts = 1
@@ -341,9 +340,9 @@ def info_to_params(audio_path):
                     sr_select = data['sr_select'] if 'sr_select' in data else "48000"
                     return decoder, struc_prompt, global_prompt, bpm, key, scale, model, custom_model, unique_prompts, text[0], text[1], text[2], text[3], text[4], text[5], text[6], text[7], text[8], text[9], repeat[0], repeat[1], repeat[2], repeat[3], repeat[4], repeat[5], repeat[6], repeat[7], repeat[8], repeat[9], audio_mode, duration, topk, topp, temperature, cfg_coef, seed, overlap, channel, sr_select
         else:
-            return "Default", False, "", 120, "C", "Major", "large", None, "medium", 1, "", "", "", "", "", "", "", "", "", "", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, "sample", 10, 250, 0, 1.0, 5.0, -1, 12, "stereo", "48000"
+            return "Default", False, "", 120, "C", "Major", "large", None, 1, "", "", "", "", "", "", "", "", "", "", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, "sample", 10, 250, 0, 1.0, 5.0, -1, 12, "stereo", "48000"
     else:
-        return "Default", False, "", 120, "C", "Major", "large", None, "medium", 1, "", "", "", "", "", "", "", "", "", "", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, "sample", 10, 250, 0, 1.0, 5.0, -1, 12, "stereo", "48000"
+        return "Default", False, "", 120, "C", "Major", "large", None, 1, "", "", "", "", "", "", "", "", "", "", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, "sample", 10, 250, 0, 1.0, 5.0, -1, 12, "stereo", "48000"
 
 
 def info_to_params_a(audio_path):
@@ -662,12 +661,12 @@ def add_tags(filename, tags):
         "sr_select": tags[11],
         "model": tags[12],
         "custom_model": tags[13],
-        "decoder": tags[15],
-        "topk": tags[16],  
-        "topp": tags[17],
-        "temperature": tags[18],
-        "cfg_coef": tags[19],
-        "generator": tags[20],
+        "decoder": tags[14],
+        "topk": tags[15],  
+        "topp": tags[16],
+        "temperature": tags[17],
+        "cfg_coef": tags[18],
+        "generator": tags[19],
         "version": version
         }
 
@@ -821,6 +820,10 @@ def predict_full(gen_type, model, decoder, custom_model, prompt_amount, struc_pr
 
     if gen_type == "audio":
         custom_model = None
+        custom_model_shrt = "none"
+    elif gen_type == "music":
+        custom_model_shrt = custom_model
+        custom_model = "models/" + custom_model
 
     if temperature < 0:
         raise gr.Error("Temperature must be >= 0.")
@@ -876,7 +879,7 @@ def predict_full(gen_type, model, decoder, custom_model, prompt_amount, struc_pr
       elif mode == "melody":
           melody = audio
 
-    custom_model = "none" if model != "custom" else custom_model
+    custom_model_shrt = "none" if model != "GrandaddyShmax/musicgen-custom" else custom_model_shrt
 
     text_cat = [p0, p1, p2, p3, p4, p5, p6, p7, p8, p9]
     drag_cat = [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9]
@@ -911,7 +914,7 @@ def predict_full(gen_type, model, decoder, custom_model, prompt_amount, struc_pr
     outs, outs_audio, outs_backup, input_length = _do_predictions(
         gen_type, [texts], [melody], sample, trim_start, trim_end, duration, image, height, width, background, bar1, bar2, channel, sr_select, progress=True,
         top_k=topk, top_p=topp, temperature=temperature, cfg_coef=cfg_coef, extend_stride=MODEL.max_duration-overlap)
-    tags = [str(global_prompt), str(bpm), str(key), str(scale), str(raw_texts), str(duration), str(overlap), str(seed), str(audio_mode), str(input_length), str(channel), str(sr_select), str(model_shrt), str(custom_model), str(base_model_shrt), str(decoder), str(topk), str(topp), str(temperature), str(cfg_coef), str(gen_type)]
+    tags = [str(global_prompt), str(bpm), str(key), str(scale), str(raw_texts), str(duration), str(overlap), str(seed), str(audio_mode), str(input_length), str(channel), str(sr_select), str(model_shrt), str(custom_model_shrt), str(decoder), str(topk), str(topp), str(temperature), str(cfg_coef), str(gen_type)]
     wav_target, mp4_target, json_target = save_outputs(outs[0], outs_audio[0], tags, gen_type);
     # Removes the temporary files.
     for out in outs:
@@ -925,8 +928,9 @@ def predict_full(gen_type, model, decoder, custom_model, prompt_amount, struc_pr
 max_textboxes = 10
 
 
-def get_available_models():
-    return sorted([re.sub('.pt$', '', item.name) for item in list(Path('models/').glob('*')) if item.name.endswith('.pt')])
+#def get_available_models():
+    #return sorted([re.sub('.pt$', '', item.name) for item in list(Path('models/').glob('*')) if item.name.endswith('.pt')])
+
 
 def get_available_folders():
     models_dir = "models"
@@ -945,7 +949,7 @@ def ui_full(launch_kwargs):
     with gr.Blocks(title='AudioCraft Plus', theme=theme) as interface:
         gr.Markdown(
             """
-            # AudioCraft Plus - v2.0.0a
+            # AudioCraft Plus - v2.0.1
 
             ### An All-in-One AudioCraft WebUI
 
@@ -1451,6 +1455,14 @@ def ui_full(launch_kwargs):
                             """
                             ## Changelog:
 
+                            ### v2.0.1
+
+                            - Changed custom model loading to support the official trained models
+
+                            - Additional changes from the main facebookresearch repo
+
+
+
                             ### v2.0.0a
 
                             - Forgot to move all the update to app.py from temp2.py... oops
@@ -1641,7 +1653,7 @@ def ui_full(launch_kwargs):
                             """
                         )
 
-        send_gen.click(info_to_params, inputs=[in_audio], outputs=[decoder, struc_prompts, global_prompt, bpm, key, scale, model, dropdown, basemodel, s, prompts[0], prompts[1], prompts[2], prompts[3], prompts[4], prompts[5], prompts[6], prompts[7], prompts[8], prompts[9], repeats[0], repeats[1], repeats[2], repeats[3], repeats[4], repeats[5], repeats[6], repeats[7], repeats[8], repeats[9], mode, duration, topk, topp, temperature, cfg_coef, seed, overlap, channel, sr_select], queue=False)
+        send_gen.click(info_to_params, inputs=[in_audio], outputs=[decoder, struc_prompts, global_prompt, bpm, key, scale, model, dropdown, s, prompts[0], prompts[1], prompts[2], prompts[3], prompts[4], prompts[5], prompts[6], prompts[7], prompts[8], prompts[9], repeats[0], repeats[1], repeats[2], repeats[3], repeats[4], repeats[5], repeats[6], repeats[7], repeats[8], repeats[9], mode, duration, topk, topp, temperature, cfg_coef, seed, overlap, channel, sr_select], queue=False)
         reuse_seed.click(fn=lambda x: x, inputs=[seed_used], outputs=[seed], queue=False)
         send_audio.click(fn=lambda x: x, inputs=[backup_only], outputs=[audio], queue=False)
         submit.click(predict_full, inputs=[gen_type, model, decoder, dropdown, s, struc_prompts, bpm, key, scale, global_prompt, prompts[0], prompts[1], prompts[2], prompts[3], prompts[4], prompts[5], prompts[6], prompts[7], prompts[8], prompts[9], repeats[0], repeats[1], repeats[2], repeats[3], repeats[4], repeats[5], repeats[6], repeats[7], repeats[8], repeats[9], audio, mode, trim_start, trim_end, duration, topk, topp, temperature, cfg_coef, seed, overlap, image, height, width, background, bar1, bar2, channel, sr_select], outputs=[output, audio_only, backup_only, download, seed_used])
