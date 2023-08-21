@@ -15,7 +15,8 @@ for two state-of-the-art AI generative models producing high-quality audio: Audi
 <br>
 <br>
 
-![image](https://github.com/GrandaddyShmax/audiocraft_plus/assets/52707645/c4c5327c-901a-40d8-91be-aa5afcf80b52)
+![image](https://github.com/GrandaddyShmax/audiocraft_plus/assets/52707645/043fc037-54a9-48c4-bb5c-bf9b7440d146)
+
 
 ## Features
 AudioCraft Plus is an all-in-one WebUI for the original AudioCraft, adding many quality features on top.
