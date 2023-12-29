@@ -39,23 +39,26 @@ pip install  torchmetrics --upgrade
 ```
 
 #### Otherwise: Clean Installation  
-AudioCraft requires Python 3.9, PyTorch 2.0.0. To install AudioCraft, you can run the following:
+AudioCraft requires Python 3.9, PyTorch 2.1.0. To install AudioCraft, you can run the following:
 
 ```shell
 # Best to make sure you have torch installed first, in particular before installing xformers.
 # Don't run this if you already have PyTorch installed.
-pip install 'torch>=2.0'
+python -m pip install 'torch==2.1.0'
+# You might need the following before trying to install the packages
+python -m pip install setuptools wheel
 # Then proceed to one of the following
 pip install -U audiocraft  # stable release
 pip install -U git+https://git@github.com/GrandaddyShmax/audiocraft_plus#egg=audiocraft  # bleeding edge
 pip install -e .  # or if you cloned the repo locally (mandatory if you want to train).
+
 ```
 
 We also recommend having `ffmpeg` installed, either through your system or Anaconda:
 ```bash
 sudo apt-get install ffmpeg
 # Or if you are using Anaconda or Miniconda
-conda install 'ffmpeg<5' -c  conda-forge
+conda install "ffmpeg<5" -c conda-forge
 ```
 
 Installation video thanks to Pogs Cafe:  
@@ -96,7 +99,9 @@ Yes! We provide the training code for [EnCodec](./docs/ENCODEC.md), [MusicGen](.
 
 #### Where are the models stored?
 
-Hugging Face stored the model in a specific location, which can be overriden by setting the `AUDIOCRAFT_CACHE_DIR` environment variable.
+Hugging Face stored the model in a specific location, which can be overriden by setting the `AUDIOCRAFT_CACHE_DIR` environment variable for the AudioCraft models.
+In order to change the cache location of the other Hugging Face models, please check out the [Hugging Face Transformers documentation for the cache setup](https://huggingface.co/docs/transformers/installation#cache-setup).
+Finally, if you use a model that relies on Demucs (e.g. `musicgen-melody`) and want to change the download location for Demucs, refer to the [Torch Hub documentation](https://pytorch.org/docs/stable/hub.html#where-are-my-downloaded-models-saved).
 
 
 ## License
@@ -108,11 +113,11 @@ Hugging Face stored the model in a specific location, which can be overriden by 
 
 For the general framework of AudioCraft, please cite the following.
 ```
-@article{copet2023simple,
+@inproceedings{copet2023simple,
     title={Simple and Controllable Music Generation},
     author={Jade Copet and Felix Kreuk and Itai Gat and Tal Remez and David Kant and Gabriel Synnaeve and Yossi Adi and Alexandre Défossez},
+    booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
     year={2023},
-    journal={arXiv preprint arXiv:2306.05284},
 }
 ```
 
