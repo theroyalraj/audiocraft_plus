@@ -309,3 +309,8 @@ class MusicGen(BaseGenModel):
 
             gen_tokens = torch.cat(all_tokens, dim=-1)
         return gen_tokens
+    
+    def to(self, device: str):
+        self.compression_model.to(device)
+        self.lm.to(device)
+        return self
