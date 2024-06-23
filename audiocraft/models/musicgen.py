@@ -29,10 +29,10 @@ MelodyType = tp.Union[torch.Tensor, MelodyList]
 
 # backward compatible names mapping
 _HF_MODEL_CHECKPOINTS_MAP = {
-    "small": "GrandaddyShmax/musicgen-small",
-    "medium": "GrandaddyShmax/musicgen-medium",
-    "large": "GrandaddyShmax/musicgen-large",
-    "melody": "GrandaddyShmax/musicgen-melody",
+    "small": "facebook/musicgen-small",
+    "medium": "facebook/musicgen-medium",
+    "large": "facebook/musicgen-large",
+    "melody": "facebook/musicgen-melody",
 }
 
 

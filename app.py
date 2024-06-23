@@ -143,12 +143,12 @@ def make_waveform(*args, **kwargs):
         return out
 
 
-def load_model(version='GrandaddyShmax/musicgen-melody', custom_model=None, gen_type="music"):
+def load_model(version='facebook/musicgen-large', custom_model=None, gen_type="music"):
     global MODEL, MODELS
     print("Loading model", version)
     if MODELS is None:
-        if version == 'GrandaddyShmax/musicgen-custom':
-            MODEL = MusicGen.get_pretrained(custom_model)
+        if version == 'theroyalraj/musicgen-custom':
+            MODEL = MusicGen.get_pretrained(version)
         else:
             if gen_type == "music":
                 MODEL = MusicGen.get_pretrained(version)
@@ -163,7 +163,7 @@ def load_model(version='GrandaddyShmax/musicgen-melody', custom_model=None, gen_
             MODEL.to('cpu') # move to cache
             print("Previous model moved to CPU in %.2fs" % (time.monotonic() - t1))
             t1 = time.monotonic()
-        if version != 'GrandaddyShmax/musicgen-custom' and MODELS.get(version) is None:
+        if version != 'theroyalraj/musicgen-custom' and MODELS.get(version) is None:
             print("Loading model %s from disk" % version)
             if gen_type == "music":
                 result = MusicGen.get_pretrained(version)
@@ -880,7 +880,7 @@ def predict_full(gen_type, model, decoder, custom_model, prompt_amount, struc_pr
       elif mode == "melody":
           melody = audio
 
-    custom_model_shrt = "none" if model != "GrandaddyShmax/musicgen-custom" else custom_model_shrt
+    custom_model_shrt = "none" if model != "theroyalraj/musicgen-custom" else custom_model_shrt
 
     text_cat = [p0, p1, p2, p3, p4, p5, p6, p7, p8, p9]
     drag_cat = [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9]
