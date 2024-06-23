@@ -822,8 +822,9 @@ def predict_full(gen_type, model, decoder, custom_model, prompt_amount, struc_pr
         custom_model = None
         custom_model_shrt = "none"
     elif gen_type == "music":
-        custom_model_shrt = custom_model
-        custom_model = "models/" + custom_model
+        if custom_model is not None:
+            custom_model_shrt = custom_model
+            custom_model = "models/" + custom_model
 
     if temperature < 0:
         raise gr.Error("Temperature must be >= 0.")
