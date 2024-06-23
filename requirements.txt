@@ -8,7 +8,7 @@ julius==0.2.7
 num2words==0.5.13
 numpy==1.25.2
 sentencepiece==0.1.99
-spacy
+spacy==3.5.2
 torch @ https://download.pytorch.org/whl/cu121/torch-2.3.0%2Bcu121-cp310-cp310-linux_x86_64.whl#sha256=0a12aa9aa6bc442dff8823ac8b48d991fd0771562eaa38593f9c8196d65f7007
 torchaudio @ https://download.pytorch.org/whl/cu121/torchaudio-2.3.0%2Bcu121-cp310-cp310-linux_x86_64.whl#sha256=38b49393f8c322dcaa29d19e5acbf5a0b1978cf1b719445ab670f1fb486e3aa6
 huggingface_hub
@@ -17,8 +17,8 @@ transformers==4.41.2
 xformers==0.0.26.post1
 demucs==4.0.1
 librosa==0.10.2.post1
-gradio==4.36.1
-gradio_client
+gradio==3.50.2
+gradio_client==0.6.1
 torchmetrics==1.4.0.post0
 encodec==0.1.1
 pytaglib==3.0.0
