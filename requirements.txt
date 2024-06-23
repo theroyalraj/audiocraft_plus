@@ -18,7 +18,6 @@ xformers==0.0.26.post1
 demucs==4.0.1
 librosa==0.10.2.post1
 gradio==4.36.1
-gradio_client==0.6.1
 torchmetrics==1.4.0.post0
 encodec==0.1.1
 pytaglib==3.0.0
