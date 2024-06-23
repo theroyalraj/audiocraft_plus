@@ -447,10 +447,6 @@ sphinxcontrib-htmlhelp==2.0.5
 sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.7
 sphinxcontrib-serializinghtml==1.1.10
-SQLAlchemy==2.0.30
-sqlglot==20.11.0
-sqlparse==0.5.0
-srsly==2.4.8
 stanio==0.5.0
 starlette==0.37.2
 statsmodels==0.14.2
@@ -527,7 +523,6 @@ wrapt==1.14.1
 xarray==2023.7.0
 xarray-einstats==0.7.0
 xformers==0.0.26.post1
-xgboost==2.0.3
 xlrd==2.0.1
 xyzservices==2024.6.0
 yarl==1.9.4
