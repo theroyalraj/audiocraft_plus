@@ -1,0 +1,24 @@
+# please make sure you have already a pytorch install that is cuda enabled!
+av
+einops
+flashy
+hydra-core
+hydra_colorlog
+julius
+num2words
+numpy
+sentencepiece
+spacy
+torch
+torchaudio
+huggingface_hub
+tqdm
+transformers
+xformers
+demucs
+librosa
+gradio
+gradio_client
+torchmetrics
+encodec
+pytaglib
