@@ -1,23 +1,24 @@
 # please make sure you have already a pytorch install that is cuda enabled!
-av
-einops
-flashy>=0.0.1
-hydra-core>=1.1
+av==12.1.0
+einops==0.8.0
+flashy==0.0.2
+hydra-core==1.3.2
 hydra_colorlog
-julius
-num2words
-numpy
-sentencepiece
+julius==0.2.7
+num2words==0.5.13
+numpy==1.25.2
+sentencepiece==0.1.99
 spacy==3.5.2
-torch>=2.0.0
-torchaudio>=2.0.0
+torch @ https://download.pytorch.org/whl/cu121/torch-2.3.0%2Bcu121-cp310-cp310-linux_x86_64.whl#sha256=0a12aa9aa6bc442dff8823ac8b48d991fd0771562eaa38593f9c8196d65f7007
+torchaudio @ https://download.pytorch.org/whl/cu121/torchaudio-2.3.0%2Bcu121-cp310-cp310-linux_x86_64.whl#sha256=38b49393f8c322dcaa29d19e5acbf5a0b1978cf1b719445ab670f1fb486e3aa6
 huggingface_hub
-tqdm
-transformers>=4.31.0  # need Encodec there.
-xformers
-demucs
-librosa
-gradio
-torchmetrics
-encodec
-pytaglib
+tqdm==4.66.4
+transformers==4.41.2
+xformers==0.0.26.post1
+demucs==4.0.1
+librosa==0.10.2.post1
+gradio==3.50.2
+gradio_client==0.6.1
+torchmetrics==1.4.0.post0
+encodec==0.1.1
+pytaglib==3.0.0
