@@ -1,0 +1,41 @@
+If you have a graphics card with less than 16gb VRAM try this:
+https://colab.research.google.com/github/camenduru/MusicGen-colab/blob/main/MusicGen_ClownOfMadness_plus_colab.ipynb
+
+Instructions for local installation
+must have miniconda/anaconda installed
+
+installation
+conda create -n audiocraft python=3.9
+conda activate audiocraft
+brew install ffmpeg (for mac)
+winget install ffmpeg (for windows)
+sudo apt install ffmpeg (for ubuntu)
+git clone -b plus https://github.com/ClownOfMadness/audiocraft_plus
+cd /audiocraft_plus
+pip install -r requirements.txt
+python app.py (or python app.py --share )
+
+If rendering on the Nvidia video card did not work for you, you need to reinstall pytorch:
+pip uninstall torch torchvision torchaudio
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+you must also have CUDA installed (https://developer.nvidia.com/cuda-downloads)
+
+Enters our prompt into the Input Text field. For example "Classic hard rock in the style of Metallica, rich guitar sound". Set the number of repetitions to 4, and set the Duration value at the bottom to 60 seconds. Thus, we set the duration of the entire track. Press Calculate Timings and calculate the duration of the segment.
+
+Then go to Settings and in Model select the Model you want to use. If you have more than 16 gigabytes of video memory, then choose large, as it will give the best sound. If you have 12-16 - then choose medium. Well, if less than 10 - then small.
+After selecting a model and pressing the Generate button, it will be downloaded by the program, the progress bar can be checked in the command line through which the program is launched.
+
+In Output Audio Channels select Stereo Effect and in Decoder select MultiBand_Diffusion. This improves the final sound. You yourself can choose what you like.
+
+Now that everything is ready, click Generate and wait.
+
+If you want to diversify the sound of the track, then in this case you need to:
+
+In Prompts, set the number of segments that the track will consist of
+Then, in the Input Text fields, describe each passage and set the number of repetitions.
+Set track length via Duration
+Click Calculate Timings to calculate the length of each segment.
+
+Using Overlap set the duration in seconds for overlapping one segment with another.
+
+An extended explanation of each of the values can be found in the Wiki tab.
